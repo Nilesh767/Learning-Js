@@ -117,7 +117,61 @@ if(age < 18){
 } else {
     console.log('Wrong value');
 }
+/*--------------------Ternary Operator--------------------*/
+fname = 'nilesh';
+age = 21;
+age>=21 ? console.log('18+') : console.log('18-'); //ternary
 
+var value = age>18 ? '18+' : '18-';// assignment + ternary
+console.log(value);
 
+/*--------------------Switch Statement--------------------*/
+job = 'something';
+switch(job){
+    case 'teacher' : console.log('teacher');break;
+    case 'something' : console.log('something');break;
+    default: console.log('none');
+}
 
+//making switch like if-else
+age = 21;
+switch(true){
+    case age < 18:
+        console.log('18-');
+        break;
+    case age > 18 && age < 50:
+        console.log('18+,50-');
+        break;
+    default: console.log('something age');
+}
+
+/*--------------------falsy/truthy values--------------------*/
+//falsy: undefined, null, 0, '', NaN
+//truhty:  all except falsy ones
+var somevalue
+somevalue = 0;
+if(somevalue){
+    console.log('defined');
+} else {
+    console.log('not defined or falsy');
+}
+console.log(typeof somevalue);
+
+var somevalu;
+if(somevalu){
+    console.log('defined');
+} else {
+    console.log('not defined or falsy');
+}
+console.log(typeof somevalu);
+/*--------------------equality(== or ===)--------------------*/
+height = 191;
+if(height == '191'){
+    console.log('true');
+}
+if(height === '191'){
+    console.log('true');
+}else{
+    console.log('false');
+}
 
