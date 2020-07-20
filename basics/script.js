@@ -273,4 +273,44 @@ console.log(somethingg);
 var is2000there = somethingg.indexOf(2000) === -1 ? '2000 not there' : '2000 is there';
 console.log('is 2000 there in array now? ', is2000there);
 
+//git pushed
 
+/*--------------------Objects And Properties--------------------*/
+
+var nilesh = {
+    fname: 'Nilesh',
+    lname: 'Choudhary',
+    birthYear: 1999,
+    family: ['Rubal','JP', 'Manju'],
+    job: 'None',
+    isMarried: false
+};
+console.log(nilesh);
+console.log('birth year is:' + nilesh.birthYear);
+console.log('Is nilesh married? '+ nilesh['isMarried']);
+console.log('job is: ', nilesh.job);
+nilesh.job = 'trying';
+console.log('new job is: ', nilesh.job);
+
+//new object syntax
+var someNewName = new Object;
+someNewName.name = 'some new';
+someNewName.birthYear = '1998';
+someNewName['lname'] = 'some lname';
+console.log('new object: ' , someNewName);
+
+/*--------------------Objects And methods--------------------*/
+
+var nilesh = {
+    fname: 'Nilesh',
+    lname: 'Choudhary',
+    birthYear: 1999,
+    family: ['Rubal','JP', 'Manju'],
+    job: 'None',
+    isMarried: false,
+    calcAge: function(){
+        this.age =  2020 - this.birthYear;
+    }
+};
+//nilesh.calcAge();
+console.log(nilesh);
