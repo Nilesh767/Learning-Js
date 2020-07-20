@@ -40,6 +40,7 @@ var x;
 console.log(typeof x);
 
 /*--------------------Opertator Precedence & Associativity--------------------*/
+
 var now = 2020;
 var born = 1999;
 var fullAge = 18;
@@ -77,6 +78,7 @@ console.log(x);
 
 /*-------------------- If/ Else Statements--------------------*/
 //if
+
 var fname = 'Nilesh';
 var age = 21;
 if (age > 18) {
@@ -118,6 +120,7 @@ if(age < 18){
     console.log('Wrong value');
 }
 /*--------------------Ternary Operator--------------------*/
+
 fname = 'nilesh';
 age = 21;
 age>=21 ? console.log('18+') : console.log('18-'); //ternary
@@ -126,6 +129,7 @@ var value = age>18 ? '18+' : '18-';// assignment + ternary
 console.log(value);
 
 /*--------------------Switch Statement--------------------*/
+
 job = 'something';
 switch(job){
     case 'teacher' : console.log('teacher');break;
@@ -146,8 +150,10 @@ switch(true){
 }
 
 /*--------------------falsy/truthy values--------------------*/
+
 //falsy: undefined, null, 0, '', NaN
 //truhty:  all except falsy ones
+
 var somevalue
 somevalue = 0;
 if(somevalue){
@@ -164,7 +170,9 @@ if(somevalu){
     console.log('not defined or falsy');
 }
 console.log(typeof somevalu);
+
 /*--------------------equality(== or ===)--------------------*/
+
 height = 191;
 if(height == '191'){
     console.log('true');
@@ -174,4 +182,95 @@ if(height === '191'){
 }else{
     console.log('false');
 }
+
+//git pushed
+/*--------------------functions--------------------*/
+
+function calAge(birthYear){
+    return 2020-birthYear;
+}
+
+var myAge = calAge(1999);
+var someAge = calAge(1998);
+console.log(myAge, someAge);
+
+//calc si
+function si(principle, rate, time){
+    console.log('function called');
+    return (principle * rate * time) / 100;
+}
+var result = si(1000, 10, 1);
+console.log('SI is: ' + result);
+
+/*--------------------Function Statement and Expressions--------------------*/
+
+// Function Expressions
+job = 'some job';
+fname = 'some name';
+
+var whatDo = function(fjob, ffname){
+    console.log('my name is: '+ fname+ ' and i do '+ job);
+    return 'return something';
+}
+;
+console.log('return value: ' + whatDo(job, fname));
+
+//funtion statement -> something which doesnt return a value
+
+//expression ->
+if(true){
+    console.log(23);
+}
+//statement, type this in "console"
+if(true){console.log(23);}
+//returns -> undefined
+
+/*--------------------Arrays--------------------*/
+
+//initialize array
+var someName = ['one', 'two', 'three'];
+var yearss = new Array(1990, 1969, 1999);
+
+//print array
+console.log(someName);
+console.log(yearss);
+console.log(someName[1]);
+console.log(yearss[0]);
+
+//change value in arrays
+someName[1] = "TWO-in caps";
+console.log(someName);
+someName[4] = 'four';
+console.log(someName);
+
+console.log('type of array: ', typeof someName);
+console.log('length of somename array: ', someName.length);
+
+//different data types in arrays -> structure
+
+var somethingg = ['abc', 'xyz', 1999, false];
+console.log(somethingg);
+console.log('type of array: ',  typeof somethingg);
+
+console.log('push');
+somethingg.push('added something');
+console.log(somethingg);
+
+console.log('pop');
+somethingg.pop();
+console.log(somethingg);
+
+console.log('index of 1999');
+console.log(somethingg.indexOf(1999));
+
+console.log('index of 2000(it doesnt exist)');
+console.log(somethingg.indexOf(2000));
+
+var is2000there = somethingg.indexOf(2000) === -1 ? '2000 not there' : '2000 is there';
+console.log('is 2000 there in array? ', is2000there);
+somethingg.push(2000);
+console.log(somethingg);
+var is2000there = somethingg.indexOf(2000) === -1 ? '2000 not there' : '2000 is there';
+console.log('is 2000 there in array now? ', is2000there);
+
 
