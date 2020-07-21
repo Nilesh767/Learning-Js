@@ -375,4 +375,4 @@ for(var i = nilesh.length-1; i > -1; i--){
     console.log(nilesh[i]);
 }
 
-
+//Basics Done upto loops and functions
