@@ -314,3 +314,65 @@ var nilesh = {
 };
 //nilesh.calcAge();
 console.log(nilesh);
+
+//git pushed
+
+/*--------------------Loops--------------------*/
+//for loop
+for(var i = 1; i<11; i++){
+    console.log(i);
+}
+
+console.log(" ");
+for(i = 1; i<=20; i+=2){
+    console.log(i);
+}
+
+console.log(" ");
+nilesh = ['nilesh', 'choudhary', 1999, 'none'];
+
+for(i = 0; i < nilesh.length; i++){
+    console.log(nilesh[i]);
+}
+
+console.log(" ");
+console.log("while loop");
+//while loop
+i=0;
+while(i < nilesh.length){
+    console.log(nilesh[i]);
+    i++;
+}
+
+
+
+/*--------------------continue and break--------------------*/
+
+console.log(" ");
+console.log("continue");
+for(i = 0; i < nilesh.length; i++){
+    if(typeof nilesh[i] !== 'string'){
+        continue;   
+    }else{
+    console.log(nilesh[i]);
+    }
+}
+
+console.log(" ");
+console.log("break");
+for(i = 0; i < nilesh.length; i++){
+    if(typeof nilesh[i] !== 'string'){
+        break;   
+    }else{
+    console.log(nilesh[i]);
+    }
+}
+
+/*--------------------reverse loop--------------------*/
+console.log(" ");
+console.log("reverse loop");
+for(var i = nilesh.length-1; i > -1; i--){
+    console.log(nilesh[i]);
+}
+
+
