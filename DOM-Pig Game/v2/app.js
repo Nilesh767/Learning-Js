@@ -1,22 +1,33 @@
-
+/*
+Updates:
+1. rolling 6 twice makes the current score 0
+2. Winning score can be adjusted by players
+3. Multiple dices
+*/
 var scores, roundScore, activePlayer, dice, gamePlaying;
 
 init();
 
+var lastDice;
 
 document.querySelector('.btn-roll').addEventListener('click', function(){  
     
     if(gamePlaying){
 
         var dice = Math.floor(Math.random() * 6) + 1;
-        var dicePrevious = dice;
 
         var diceDOM = document.querySelector('.dice');
         
         diceDOM.style.display  = 'block';
         diceDOM.src = 'dice-' + dice + '.png';
     
-        if(dice !== 1 && (dice !== 6 && dicePrevious !== 6)){
+        if(dice === 6 && lastDice === 6){
+            
+            scores[activePlayer] = 0;
+            document.querySelector('#score-' + activePlayer).textContent = 0;
+            nextPlayer();
+
+        }else if(dice !== 1){
 
             roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
@@ -26,6 +37,8 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
           nextPlayer();
 
         }
+
+        lastDice = dice;
     }
 });
 
