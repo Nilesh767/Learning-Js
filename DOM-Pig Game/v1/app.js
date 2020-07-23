@@ -16,6 +16,7 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     if(gamePlaying){
         //1. Random Number
         var dice = Math.floor(Math.random() * 6) + 1;
+        var dicePrevious = dice;
         //2. Display Result
         var diceDOM = document.querySelector('.dice');
         
@@ -23,7 +24,7 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
         diceDOM.src = 'dice-' + dice + '.png';
     
         //3. Update the round score IF random number isn't 1
-        if(dice !== 1){
+        if(dice !== 1 && (dice !== 6 && dicePrevious !== 6)){
            //Add Score
            roundScore += dice;
            document.querySelector('#current-' + activePlayer).textContent = roundScore;
