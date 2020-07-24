@@ -1,5 +1,6 @@
 // Function Constructor
 
+/*
 
 var neo = {
     name: 'nilesh',
@@ -62,18 +63,54 @@ var someone = Object.create(personProto, {
 })
 console.log(someone);
 
+*/
+//git pushed
+
+//primitive vs objects
+//primitive -> string, number, boolean, undefined, null
+
+//object -> arrays, etc(everything except primitive)
 
 
+//primitive
+var a = 5; //stored at a
+var b = a; //b will hold value of a
+a = 555;//update a
+console.log(a);
+console.log(b);
+// primitive variable hold value in themselves
 
 
+//object
+var obj1 = {
+    name: 'a',
+    some: 1
+};//stores a
+
+var obj2 = obj1;// stores a into b
+
+obj1.some = 3;//change a
+
+console.log(obj1.some);//obj1 -> got updates
+console.log(obj2.some);//obj2 -> this had a
+//object variables hold the reference of the location where the object is stored
 
 
+//functions
 
+var age = 3;
+var obj = {
+    name: 'some',
+    city: 'some'
+};
 
+function change(a,b){
+    a=3;
+    b.city = 'bla';
+}
 
-
-
-
-
+change(age, obj);
+console.log(age);
+console.log(obj.city);
 
 
