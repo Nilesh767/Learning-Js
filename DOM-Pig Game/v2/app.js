@@ -2,43 +2,56 @@
 Updates:
 1. rolling 6 twice makes the current score 0
 2. Winning score can be adjusted by players
-3. Multiple dices
+3. Multiple dices -> new rule: both must be non-1 
 */
-var scores, roundScore, activePlayer, dice, gamePlaying;
+var scores, roundScore, activePlayer, dice1, dice2, gamePlaying;
 
 init();
-
-var lastDice;
 
 document.querySelector('.btn-roll').addEventListener('click', function(){  
     
     if(gamePlaying){
 
-        var dice = Math.floor(Math.random() * 6) + 1;
+        var dice1 = Math.floor(Math.random() * 6) + 1;
+        var dice2 = Math.floor(Math.random() * 6) + 1;
 
-        var diceDOM = document.querySelector('.dice');
-        
-        diceDOM.style.display  = 'block';
-        diceDOM.src = 'dice-' + dice + '.png';
-    
-        if(dice === 6 && lastDice === 6){
-            
-            scores[activePlayer] = 0;
-            document.querySelector('#score-' + activePlayer).textContent = 0;
-            nextPlayer();
+        var diceDOM1 = document.querySelector('.dice-1');
+        var diceDOM2 = document.querySelector('.dice-2');
 
-        }else if(dice !== 1){
+        diceDOM1.style.display  = 'block';
+        diceDOM2.style.display  = 'block';
 
-            roundScore += dice;
+        diceDOM1.src = 'dice-' + dice1 + '.png';
+        diceDOM2.src = 'dice-' + dice2 + '.png';
+
+        if(dice1 !== 1 && dice2 !== 1) {
+            roundScore += (dice1 + dice2);
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
-        
-        }else {
-
-          nextPlayer();
-
+    
+        } else {
+            nextPlayer();
         }
 
+
+        //1. rolling 6 twice makes the current score 0
+        /*
+        if (dice1 === 6 && lastDice === 6) {
+            
+            scores[activePlayer] = 0;
+            document.querySelector('#score-' + activePlayer).textContent = '0';
+            nextPlayer();
+
+        }else if (dice !== 1) {
+            
+            roundScore += dice;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+    
+        }else {
+          nextPlayer();
+        }
+        
         lastDice = dice;
+        */
     }
 });
 
@@ -50,16 +63,24 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
-        if (scores[activePlayer] >= 100) {
-            
+        var input = document.querySelector('.final-score').value;
+        var winningScore;
+        
+        if(input) {
+            winningScore = input;
+        } else {
+            winningScore = 100;
+        }
+        
+        if (scores[activePlayer] >= winningScore) {
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
-            document.querySelector('.dice').style.display = 'none';
-            
+            document.querySelector('.dice-1').style.display = 'none';
+            document.querySelector('.dice-2').style.display = 'none';
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
             document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-            
             gamePlaying = false;
         } else {
+            //Next player
             nextPlayer();
         }
     }    
@@ -73,7 +94,9 @@ function init(){
     roundScore = 0;
     gamePlaying = true;
     
-    document.querySelector('.dice').style.display = 'none';
+    document.querySelector('.dice-1').style.display = 'none';
+    document.querySelector('.dice-2').style.display = 'none';
+
 
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
@@ -98,5 +121,7 @@ function nextPlayer(){
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
 
-    document.querySelector('.dice').style.display = 'none';
+    document.querySelector('.dice-1').style.display = 'none';
+    document.querySelector('.dice-2').style.display = 'none';
+
 }
