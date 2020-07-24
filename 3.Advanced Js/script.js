@@ -1,7 +1,5 @@
 // Function Constructor
 
-/*
-
 var neo = {
     name: 'nilesh',
     yearOfBirth: 1999,
@@ -63,7 +61,6 @@ var someone = Object.create(personProto, {
 })
 console.log(someone);
 
-*/
 //git pushed
 
 //primitive vs objects
@@ -113,4 +110,44 @@ change(age, obj);
 console.log(age);
 console.log(obj.city);
 
+
+//git pushed
+
+//passing function as an arguement
+
+var years = [1999, 1998, 1997, 2005, 1995];
+
+function arrayCalc(arr, fn) {
+    var arrRes = [];
+    for( var i = 0; i < arr.length; i++) {
+        arrRes.push(fn(arr[i]));
+    }
+    return arrRes;
+}
+
+function calcAge(el) {
+    return 2020 - el;
+}
+
+function isFullAge(el) {
+    return el>=18;
+}
+
+function maxHB(el) {
+    if(el >= 18 && el <= 81) {
+    return Math.round(206.9 - (0.67 *el));
+    } else {
+        return -1;
+    }
+}
+
+var ages = arrayCalc(years, calcAge);
+
+var fullAges = arrayCalc(ages, isFullAge);
+
+var rates = arrayCalc(ages, maxHB);
+
+console.log(ages);
+console.log(fullAges);
+console.log(rates);
 
