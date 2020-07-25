@@ -166,3 +166,45 @@ game();
     console.log(score>=5);
 })();
 
+//git pushed
+
+//closures
+
+function retirement(retirementAge){
+    var a = ' years left';
+    return function(yearOfBIrth) {
+        var age = 2020 - yearOfBIrth;
+        console.log((retirementAge - age) + a);
+    }
+}
+
+var retireIndia = retirement(60);
+var retirementUs = retirement(66);
+var retirementGermany = retirement(65);
+var retirementIceland = retirement(67);
+
+
+retireIndia(1999);
+retirementUs(1999);
+retirementGermany(1999);
+retirementIceland(1999);
+
+
+//retirement(66)(1999);
+
+ function interviewQuestion(job) {
+     return function(name) {
+        if( job == 'designer') {
+                console.log(name, 'is ', job);
+        } else if( job == 'teacher') {
+               console.log(name, 'is ', job);
+        } else {
+              console.log(name, 'is jobless');
+        }
+    }
+ }
+
+ var something = interviewQuestion('');
+ something("nilesh");
+ interviewQuestion('')('neo');
+
