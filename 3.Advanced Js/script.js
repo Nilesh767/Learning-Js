@@ -151,3 +151,18 @@ console.log(ages);
 console.log(fullAges);
 console.log(rates);
 
+//git pushed
+
+// immediately invoked function expressions(IIFE)
+
+function game(){
+    var score = Math.random() * 10;
+    console.log(score>=5);
+}
+game();
+
+( function (){
+    var score = Math.random() * 10;
+    console.log(score>=5);
+})();
+
