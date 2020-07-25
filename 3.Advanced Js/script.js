@@ -208,3 +208,41 @@ retirementIceland(1999);
  something("nilesh");
  interviewQuestion('')('neo');
 
+//git pushed
+
+//bind, call and apply
+
+var john = {
+    name: 'john',
+    age: 21,
+    job: 'teacher',
+    presentation: function (style, timeOfDay) {
+        if(style === 'formal') {
+            console.log('formal ' + timeOfDay + ' stuff: '+ this.name + ' ' + this.job + ' ' + this.age);
+        } else if (style === 'friendly') {
+            console.log('friendly ' + timeOfDay + ' stuff: '+ this.name + ' ' + this.job + ' ' + this.age);
+        } else {
+            console.log('else ' + timeOfDay + ' stuff: '+ this.name + ' ' + this.job + ' ' + this.age);
+        }
+    }
+};
+
+var emily = {
+    name: 'emily',
+    age: 22,
+    job: 'some job'
+};
+
+john.presentation('friendly', 'sometime');
+
+john.presentation.call(emily, 'formal', 'teacher');
+
+john.presentation.apply(emily, ['friendly', 'sometime'])
+
+var func  = john.presentation.bind(emily, 'lul');
+func('this time');
+
+//call -> call other object's function
+//apply -> same like call but argument are passed as params
+//bind -> same like call but it returns a functions which have to be called explicitly
+
