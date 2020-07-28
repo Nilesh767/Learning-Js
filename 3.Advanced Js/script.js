@@ -1,22 +1,25 @@
+/*
+
+
 // Function Constructor
 
-var neo = {
-    name: 'nilesh',
-    yearOfBirth: 1999,
-    job: 'student'
-};
-console.log(typeof neo);
-console.log(neo);
+// var neo = {
+//     name: 'nilesh',
+//     yearOfBirth: 1999,
+//     job: 'student'
+// };
+// console.log(typeof neo);
+// console.log(neo);
 
 var Person = function(name, yearOfBirth, job) {
     this.name = name;
     this.yearOfBirth = yearOfBirth;
     this.job = job;
-}
+};
 
 Person.prototype.calAge = function() {
     console.log(2020 - this.yearOfBirth);
-}
+};
 
 Person.prototype.lname = 'some sname';
 
@@ -46,7 +49,7 @@ var personProto = {
     calAge: function(){
         console.log(2020 - this.yearOfBirth);
     }
-}
+};
 
 var neo = Object.create(personProto);
 neo.name = 'nilesh';
@@ -58,7 +61,7 @@ var someone = Object.create(personProto, {
     name: {value: 'some name'},
     yearOfBirth: { value: 1999},
     job: { value: 'some job'}
-})
+});
 console.log(someone);
 
 //git pushed
@@ -95,16 +98,16 @@ console.log(obj2.some);//obj2 -> this had a
 
 //functions
 
-var age = 3;
+var age = 21;
 var obj = {
     name: 'some',
     city: 'some'
 };
 
 function change(a,b){
-    a=3;
+    a=7;
     b.city = 'bla';
-}
+};
 
 change(age, obj);
 console.log(age);
@@ -123,15 +126,15 @@ function arrayCalc(arr, fn) {
         arrRes.push(fn(arr[i]));
     }
     return arrRes;
-}
+};
 
 function calcAge(el) {
     return 2020 - el;
-}
+};
 
 function isFullAge(el) {
     return el>=18;
-}
+};
 
 function maxHB(el) {
     if(el >= 18 && el <= 81) {
@@ -139,7 +142,7 @@ function maxHB(el) {
     } else {
         return -1;
     }
-}
+};
 
 var ages = arrayCalc(years, calcAge);
 
@@ -172,11 +175,12 @@ game();
 
 function retirement(retirementAge){
     var a = ' years left';
+    
     return function(yearOfBIrth) {
         var age = 2020 - yearOfBIrth;
         console.log((retirementAge - age) + a);
     }
-}
+};
 
 var retireIndia = retirement(60);
 var retirementUs = retirement(66);
@@ -190,7 +194,7 @@ retirementGermany(1999);
 retirementIceland(1999);
 
 
-//retirement(66)(1999);
+retirement(66)(1999);
 
  function interviewQuestion(job) {
      return function(name) {
@@ -202,10 +206,11 @@ retirementIceland(1999);
               console.log(name, 'is jobless');
         }
     }
- }
+};
 
  var something = interviewQuestion('');
  something("nilesh");
+
  interviewQuestion('')('neo');
 
 //git pushed
@@ -239,10 +244,130 @@ john.presentation.call(emily, 'formal', 'teacher');
 
 john.presentation.apply(emily, ['friendly', 'sometime'])
 
-var func  = john.presentation.bind(emily, 'lul');
-func('this time');
+var func  = john.presentation.bind(emily, 'lul','this time');
+func();
+// or -> 
+var func  = john.presentation.bind(emily);
+func('lul','this time');
 
 //call -> call other object's function
 //apply -> same like call but argument are passed as params
 //bind -> same like call but it returns a functions which have to be called explicitly
 
+*/
+
+// challenge
+/*
+(function(){
+
+})();
+
+function Question(question, choice, answer){
+    this.question = question;
+    this.choice = choice;
+    this.answer = answer;
+};
+
+Question.prototype.displayQuestion = function() {
+     console.log(this.question);
+     
+     for(var i = 0; i < this.choice.length; i++){
+        console.log(i + ': ' +this.choice[i]);
+    }
+};
+Question.prototype.checkAnswer = function(ans) {
+    if(ans === this.answer){
+        console.log('Correct Answer, Refresh baka')
+    } else {
+        console.log('Wrong Answer, Refresh baka');
+    }
+};
+var question1 = new Question('numerical of a',[3,2,1],2);
+var question2 = new Question('numerical of c',[22,3,7],1);
+var question3 = new Question('numerical of f',[14,1,6],2);
+
+var questions = [question1, question2, question3];
+
+var random = Math.floor(Math.random() * questions.length);
+
+questions[random].displayQuestion();
+
+var answer = parseInt(prompt('your choice'));
+
+questions[random].checkAnswer(answer);
+
+*/
+
+//adv version
+
+(function(){
+
+function Question(question, choice, answer){
+    this.question = question;
+    this.choice = choice;
+    this.answer = answer;
+};
+
+Question.prototype.displayQuestion = function() {
+     console.log(this.question);
+     
+     for(var i = 0; i < this.choice.length; i++){
+        console.log(i + ': ' +this.choice[i]);
+    }
+};
+Question.prototype.checkAnswer = function(ans, callback) {
+    var sc;
+
+    if(ans === this.answer){
+        console.log('Correct Answer');
+        sc = callback(true);
+    } else {
+        console.log('Wrong Answer, baka');
+        sc = callback(false);
+    }
+
+    this.displayScore(sc);
+};
+
+Question.prototype.displayScore = function(score) {
+    console.log('your score: '+ score);
+    console.log('---------------------------------------------');
+}
+
+var question1 = new Question('numerical of a',[3,2,1],2);
+var question2 = new Question('numerical of c',[22,3,7],1);
+var question3 = new Question('numerical of f',[14,1,6],2);
+
+var questions = [question1, question2, question3];
+
+function score() {
+    var sc = 0;
+
+    return function(correct) {
+        if(correct){
+            sc++;
+        }
+        return sc;
+    }
+}
+
+var keepScore = score();
+
+function nextQuestion() {
+
+    var random = Math.floor(Math.random() * questions.length);
+
+    questions[random].displayQuestion();
+
+    var answer = prompt('(type "exit" to stop. Your choice:', 'exit');
+
+
+    if( answer !== 'exit') {
+        questions[random].checkAnswer(parseInt(answer), keepScore);
+        nextQuestion();
+    }
+};
+
+nextQuestion();
+
+})();
