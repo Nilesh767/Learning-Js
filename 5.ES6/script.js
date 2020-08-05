@@ -98,8 +98,29 @@ console.log(j);
 //console.log(a + ' '+b); -> not accessible
 console.log(c);// -> accessible because its a var
 
+/********************* Strings **********************/
 
+let fName = 'some fName';
+let lName = 'some lName';
+const yob = 1999;
 
+function calcAge(year) {
+    return 2020 - year;
+}
+
+//ES5
+console.log('Name: ' + fName + ' ' + lName + ', ' + 'age: ' + calcAge(yob));
+
+//ES6 -> called template literals -> uses this ```````
+console.log(`Name: ${fName} ${lName}, age: ${calcAge(yob)}`);
+
+//methods in strings
+const name = `${fName} ${lName}`;
+console.log(name.startsWith('s'));
+console.log(name.startsWith('S'));
+console.log(name.endsWith('e'));
+console.log(name.includes('x'));
+console.log(`${fName} `.repeat(3));
 
 
 
