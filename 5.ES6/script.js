@@ -18,7 +18,7 @@ console.log(name6);
 //ES5
 function driverLicense5(passedTest) {
     if (passedTest) {
-        var fName = 'some fname';
+        var fName = 'some fName';
         var yob = 1999;
     }
     console.log(fName + ' ' + yob);
@@ -78,4 +78,32 @@ for (let j = 0; j < 5; j++) {
     console.log(j);
 }
 console.log(j);
+
+/********************* Blocks And IIFEs **********************/
+
+//IIFEs
+//ES5
+(function () {
+    var c = 3;
+})();
+//console.log(c); -> not accessible
+
+//block
+//ES6
+{
+    const a = 1;
+    let b = 2;
+    var c = 3;
+}
+//console.log(a + ' '+b); -> not accessible
+console.log(c);// -> accessible because its a var
+
+
+
+
+
+
+
+
+
 
