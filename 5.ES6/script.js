@@ -122,7 +122,91 @@ console.log(name.endsWith('e'));
 console.log(name.includes('x'));
 console.log(`${fName} `.repeat(3));
 
+/********************* Arrow Functions **********************/
 
+const years = [1999, 1965, 1934, 1996];
+
+//ES5
+var ages5 = years.map(function (el) {
+    return 2020 - el;
+});
+console.log(ages5);
+
+//ES6
+let ages6 = years.map(el => 2020 - el);
+console.log(ages6);
+
+ages6 = years.map((el, index) => `age element ${index + 1}: ${2020 - el}`);
+console.log(ages6);
+
+ages6 = years.map((el, index) => {
+    const now = new Date().getFullYear();
+    const age = now - el;
+    return `age element ${index + 1}: ${age}`;
+});
+console.log(ages6);
+
+
+//This keyword in arrows
+
+//ES5
+var box5 = {
+    color: 'green',
+    position: 1,
+    clickMe: function () {
+        document.querySelector('.green').addEventListener('click', function () {
+            var str = 'this is box no ' + this.position + 'and it is ' + this.color;
+            alert(str);
+        });
+    }
+}
+//box5.clickMe(); // wont work and will show undefined,
+// because this points to global windows var
+
+//ES6
+const box6 = {
+    color: 'green',
+    position: 1,
+    clickMe: function () {
+        document.querySelector('.green').addEventListener('click', () => {
+            const str = `this is box no ${this.position} and color is ${this.color}`;
+            alert(str);
+        });
+    }
+}
+box6.clickMe();// arrow function uses lexical this( of its parent proto i think)
+
+
+function Person(name) {
+    this.name = name;
+}
+
+//ES5
+Person.prototype.myFriends5 =
+    function (friends) {
+        var arr = friends.map(function (el) {
+                return this.name + ' oof ' + el;
+            }.bind(this)
+        );
+        console.log(arr);
+    }
+
+var friends5 = ['a', 'b', 'c'];
+new Person('name').myFriends5(friends5);
+
+//wont show name(this.name) because "this" here is inner anon. function
+//bind makes a new copy of the outer function to solve the problem
+
+//ES6
+Person.prototype.myFriends6 =
+    function (friends) {
+        const arr = friends.map(el => `${this.name} oof ${el}`);
+        console.log(arr);
+    }
+let friends6 = ['a', 'b', 'c'];
+new Person('name').myFriends6(friends6);
+
+//gets lexical this from our function and works
 
 
 
