@@ -240,11 +240,58 @@ function calcAgeRetirement(year) {
 const [agere, retirement] = calcAgeRetirement(1999);
 console.log(agere, retirement);
 
+/********************* Arrays **********************/
+//change color of boxes
+const boxes = document.querySelectorAll('.box');
+
+//ES5
+/*var boxesArr5 = Array.prototype.slice.call(boxes);
+boxesArr5.forEach(function (cur) {
+    cur.style.backgroundColor = 'blue';
+});*/
+
+//ES6
+const boxesArr6 = Array.from(boxes);
+boxesArr6.forEach(cur => cur.style.backgroundColor = 'orange');
+
+//or
+//Array.from(boxes).forEach(cur => cur.style.backgroundColor = 'pink');
 
 
+//change text of boxes
 
 
+//ES5
+/*for (var i = 0; i < boxesArr5.length; i++) {
+    if (boxesArr5[i].className === 'box blue') {
+        continue;
+    }
+
+    boxesArr5[i].textContent = 'I am also blue';
+}*/
+
+//ES6
+for (const cur of boxesArr6) {
+    if (cur.className.includes('orange')) {
+        continue;
+    }
+    cur.textContent = 'I am also orange';
+}
 
 
+//ES5
+var ages = [12, 12, 13, 11, 21, 17];
 
+var full = ages.map(function (cur) {
+    return cur >= 18;
+});
+
+console.log(full);
+console.log('index is: ' + full.indexOf(true));
+console.log('age is: ' + ages[full.indexOf(true)]);
+
+//ES6
+let ages66 = [12, 12, 13, 11, 21, 17];
+console.log('index is: ' + ages66.findIndex(cur => cur >= 18));
+console.log('age is: ' + ages66.find(cur => cur >= 18))
 
