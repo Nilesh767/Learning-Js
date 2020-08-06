@@ -208,6 +208,42 @@ new Person('name').myFriends6(friends6);
 
 //gets lexical this from our function and works
 
+/********************* Destructuring **********************/
+
+//ES5
+var nilesh5 = ['nilesh', 21];
+var namee5 = nilesh5[0];
+var agee5 = nilesh5[1];
+
+//ES6
+const [namee6, agee6] = ['nilesh', 21];
+console.log(namee6, agee6);
+
+const obj = {
+    fnamee: 'nilesh',
+    lnamee: 'choudhary'
+};
+
+const {fnamee, lnamee} = obj;
+console.log(fnamee, lnamee);
+
+const {fnamee: a, lnamee: b} = obj;//if name change
+console.log(a, b);
+
+
+function calcAgeRetirement(year) {
+    const agere = new
+    Date().getFullYear() - year;
+    return [agere, 65 - agere];
+}
+
+const [agere, retirement] = calcAgeRetirement(1999);
+console.log(agere, retirement);
+
+
+
+
+
 
 
 
