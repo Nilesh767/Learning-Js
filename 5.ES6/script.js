@@ -419,5 +419,109 @@ for (let [key, value] of question.entries()) {
     console.log(`this is ${key}, and its value is ${value}`);
 }
 
+/********************* Classes **********************/
+
+//ES5
+var Person5 = function (name, yob, job) {
+    this.name = name;
+    this.yob = yob;
+    this.job = job;
+}
+
+Person5.prototype.calcAge = function () {
+    var age = new Date().getFullYear() - this.yob;
+    console.log(age);
+}
+var someName = new Person5('name', 1999, 'some job');
+console.log(someName);
+someName.calcAge();
+
+//ES6
+class Person6 {
+    constructor(name, yob, job) {
+        this.name = name;
+        this.yob = yob;
+        this.job = job;
+    }
+
+    static greeting() {
+        console.log('henlo!');
+    }
+
+    calcAge() {
+        let age = new Date().getFullYear() - this.yob;
+        console.log(age);
+    }
+}
+
+const someName6 = new Person6('name', 1999, 'job');
+console.log(someName6);
+someName6.calcAge();
+someName6.constructor.greeting();
+
+// subclasses-------------------------------------------
+
+
+//ES5
+var Person5b = function (name, yob, job) {
+    this.name = name;
+    this.yob = yob;
+    this.job = job;
+}
+
+Person5b.prototype.calcAge = function () {
+    var age = new Date().getFullYear() - this.yob;
+    console.log(age);
+}
+
+var Athelete5 = function (name, yob, job, olyGames, medals) {
+    Person5b.call(this, name, yob, job);
+    this.olyGames = olyGames;
+    this.medals = medals;
+}
+
+Athelete5.prototype = Object.create(Person5b.prototype);
+
+Athelete5.prototype.wonMedal = function () {
+    this.medals++;
+    console.log(this.medals);
+}
+
+var someAthelete5 = new Athelete5('name', 1999, 'some job', 3, 7);
+console.log(someAthelete5);
+someAthelete5.calcAge();
+someAthelete5.wonMedal();
+
+//ES6
+class Person6b {
+    constructor(name, yob, job) {
+        this.name = name;
+        this.yob = yob;
+        this.job = job;
+    }
+
+    calcAge() {
+        let age = new Date().getFullYear() - this.yob;
+        console.log(age);
+    }
+}
+
+class Athlete6 extends Person6b {
+    constructor(name, yob, job, olyGames, medals) {
+        super(name, yob, job);
+        this.olyGames = olyGames;
+        this.medals = medals;
+    }
+
+    wonMedals() {
+        this.medals++;
+        console.log(this.medals);
+    }
+}
+
+const someAthlete6 = new Athlete6('name', 1999, 'job', 3, 11);
+console.log(someAthlete6);
+someAthlete6.calcAge();
+someAthlete6.wonMedals();
 
 
