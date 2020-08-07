@@ -366,3 +366,36 @@ function isFullAge6b(limit, ...years) {
 
 isFullAge6b(18, 1999, 2006, 2001, 2004, 2000);
 
+/********************* Default Parameters **********************/
+
+//ES5
+function family5(fName, lName, yob, nationality) {
+
+    nationality === undefined ? nationality = 'India' : nationality;
+
+    this.fName = fName;
+    this.lName = lName;
+    this.yob = yob;
+    this.nationality = nationality;
+}
+
+var person1 = new family5('a', 'x', 1999);
+console.log(person1);
+
+var person2 = new family5('b', 'y', 1995, 'some thing');
+console.log(person2);
+
+//ES6
+function family6(fName, lName, yob, nationality = 'india') {
+    this.fName = fName;
+    this.lName = lName;
+    this.yob = yob;
+    this.nationality = nationality;
+}
+
+let person3 = new family6('a', 'x', 1999);
+console.log(person3);
+
+let person4 = new family6('b', 'y', 1995, 'some thing');
+console.log(person4);
+
