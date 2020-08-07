@@ -324,3 +324,45 @@ const boxes6 = document.querySelectorAll('.box');
 const all = [heading, ...boxes6];
 Array.from(all).forEach(cur => cur.style.color = 'red');
 
+/********************* Rest Parameters **********************/
+
+//ES5
+function isFullAge5() {
+    console.log(arguments);
+    var argsArr = Array.prototype.slice.call(arguments);
+    argsArr.forEach(function (cur) {
+        console.log((2020 - cur) >= 18);
+    })
+}
+
+//isFullAge5(1999, 2007, 2001);
+//isFullAge5(1999, 2007, 2001, 2009, 1995);
+
+//ES6
+function isFullAge6(...years) {
+    years.forEach(cur => console.log((2020 - cur) >= 18));
+}
+
+//isFullAge6(1999,2006,2001,2004,2000);
+
+//-----------------------------------------------------------
+//ES5
+function isFullAge5b(limit) {
+    console.log(arguments);
+    var argsArr = Array.prototype.slice.call(arguments, 1);
+    console.log(arguments);
+    argsArr.forEach(function (cur) {
+        console.log((2020 - cur) >= limit);
+    })
+}
+
+//isFullAge5b(18, 1999, 2007, 2001);
+//isFullAge5b(1999, 2007, 2001, 2009, 1995);
+
+//ES6
+function isFullAge6b(limit, ...years) {
+    years.forEach(cur => console.log((2020 - cur) >= limit));
+}
+
+isFullAge6b(18, 1999, 2006, 2001, 2004, 2000);
+
