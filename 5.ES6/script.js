@@ -399,3 +399,25 @@ console.log(person3);
 let person4 = new family6('b', 'y', 1995, 'some thing');
 console.log(person4);
 
+/********************* Maps **********************/
+
+const question = new Map();
+question.set('q1', 'some q');
+question.set('a1', 'some a');
+console.log(question);
+console.log(question.get('a1'));
+//question.delete('a1');
+//console.log(question);
+console.log(question.has('a1'));
+//question.clear();
+//console.log(question);
+
+question.forEach((value, key) => console.log(`this is ${key}, and its value is ${value}`));
+
+for (let [key, value] of question.entries()) {
+    console.log(key);
+    console.log(`this is ${key}, and its value is ${value}`);
+}
+
+
+
