@@ -295,3 +295,32 @@ let ages66 = [12, 12, 13, 11, 21, 17];
 console.log('index is: ' + ages66.findIndex(cur => cur >= 18));
 console.log('age is: ' + ages66.find(cur => cur >= 18))
 
+/********************* Spread  Operator **********************/
+
+function addFourAges(a, b, c, d) {
+    return a + b + c + d;
+}
+
+var sum1 = addFourAges(12, 13, 54, 29);
+console.log(sum1);
+
+//ES5
+ages = [12, 13, 54, 29];
+var sum2 = addFourAges.apply(null, ages);
+console.log(sum2);
+
+//ES6
+const sum3 = addFourAges(...ages);
+console.log(sum3);
+
+const family1 = ['a', 'b', 'c'];
+const family2 = ['x', 'y', 'z'];
+const families = [...family1, ...family2, 'p'];
+console.log(families);
+
+
+const heading = document.querySelector('h1');
+const boxes6 = document.querySelectorAll('.box');
+const all = [heading, ...boxes6];
+Array.from(all).forEach(cur => cur.style.color = 'red');
+
