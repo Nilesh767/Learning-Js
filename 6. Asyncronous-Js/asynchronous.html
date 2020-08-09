@@ -126,11 +126,11 @@
         //work around via https://cors-anywhere.herokuapp.com/ link
         fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${world}/`)
             .then(result => {
-                console.log(result);
+                //console.log(result);
                 return result.json();
             })
             .then(data => {
-                //console.log(data);
+                console.log(data);
                 const today = data.consolidated_weather[0];
                 console.log(`temp in ${data.title} is between ${today.min_temp} and ${today.max_temp}`);
             })
@@ -140,7 +140,24 @@
     }
 
     getWeather(2487956);
-    getWeather(2534253); //error
+    //getWeather(2534253); //error
+
+    //async-await version
+    /*
+
+        async function getWeatherAW(woeid) {
+            const result = fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`);
+            const data = await result.json();
+            console.log(data);
+            const today = data.consolidated_weather[0];
+            console.log(`temp in ${data.title} is between ${today.min_temp} and ${today.max_temp}`);
+            return  data;
+        }
+        getWeatherAW(2487956);
+        //getWeather(2534253); //error
+    */
+
+
 </script>
 <body>
 <h1>Asynchronous JavaScript</h1>
