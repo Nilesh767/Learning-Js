@@ -49,76 +49,98 @@
 
         getRecipe();
     */
-
-    //Callback Promise
-    const getIds = new Promise((resolve/*, reject*/) => {
-        setTimeout(() => {
-            resolve([123, 321, 34, 654]);
-        }, 1500);
-    });
-
-    const getRecipe = recID => {
-        return new Promise((resolve/*, reject*/) => {
-            setTimeout(id => {
-                const recipe = {
-                    title: 'some recipe',
-                    publisher: 'some publisher'
-                };
-                resolve(`${id}: ${recipe.title}`);
-            }, 1500, recID);
-        });
-    };
-
-    const getRelated = publisher => {
-        return new Promise((resolve/*, reject*/) => {
-            setTimeout(pub => {
-                const recipe = {
-                    title: 'some other title',
-                    publisher: 'some publisher'
-                };
-                resolve(`${pub}: ${recipe.title}`);
-            }, 1500, publisher);
-        });
-    };
-
-    /*getIds
-        .then(Ids => {
-            console.log(Ids);
-            return getRecipe(Ids[2])
-        })
-        .then(recipe => {
-            console.log(recipe);
-            return getRelated('some publisher');
-        })
-        .then(recipe => {
-            console.log(recipe);
-        })
-        .catch(error => {
-            console.log(error);
-        });*/
-
-    async function getRecipesAW() {
-        const IDs = await getIds;
-        console.log(IDs);
-        const recipe = await getRecipe(IDs[2]);
-        console.log(recipe);
-        const related = await getRelated('some publisher');
-        console.log(related);
-
-        return recipe;
-    }
-
-    //getRecipesAW(); --> works
     /*
-    const  rec = getRecipesAW();
-    console.log(rec);
-    --------->wont work as this is sync not async
-    ---------> async fn works in background
+
+        //Callback Promise
+        const getIds = new Promise((resolve/!*, reject*!/) => {
+            setTimeout(() => {
+                resolve([123, 321, 34, 654]);
+            }, 1500);
+        });
+
+        const getRecipe = recID => {
+            return new Promise((resolve/!*, reject*!/) => {
+                setTimeout(id => {
+                    const recipe = {
+                        title: 'some recipe',
+                        publisher: 'some publisher'
+                    };
+                    resolve(`${id}: ${recipe.title}`);
+                }, 1500, recID);
+            });
+        };
+
+        const getRelated = publisher => {
+            return new Promise((resolve/!*, reject*!/) => {
+                setTimeout(pub => {
+                    const recipe = {
+                        title: 'some other title',
+                        publisher: 'some publisher'
+                    };
+                    resolve(`${pub}: ${recipe.title}`);
+                }, 1500, publisher);
+            });
+        };
+
+        /!*getIds
+            .then(Ids => {
+                console.log(Ids);
+                return getRecipe(Ids[2])
+            })
+            .then(recipe => {
+                console.log(recipe);
+                return getRelated('some publisher');
+            })
+            .then(recipe => {
+                console.log(recipe);
+            })
+            .catch(error => {
+                console.log(error);
+            });*!/
+
+        async function getRecipesAW() {
+            const IDs = await getIds;
+            console.log(IDs);
+            const recipe = await getRecipe(IDs[2]);
+            console.log(recipe);
+            const related = await getRelated('some publisher');
+            console.log(related);
+
+            return recipe;
+        }
+
+        //getRecipesAW(); --> works
+        /!*
+        const  rec = getRecipesAW();
+        console.log(rec);
+        --------->wont work as this is sync not async
+        ---------> async fn works in background
+        *!/
+
+        //alternative to use return
+        getRecipesAW().then(result => console.log(`${result} bla bla`));
     */
 
-    //alternative to use return
-    getRecipesAW().then(result => console.log(`${result} bla bla`));
+    function getWeather(world) {
+        //wont work nvm -> cross-origin issue
+        //work around via https://cors-anywhere.herokuapp.com/ link
+        fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${world}/`)
+            .then(result => {
+                console.log(result);
+                return result.json();
+            })
+            .then(data => {
+                //console.log(data);
+                const today = data.consolidated_weather[0];
+                console.log(`temp in ${data.title} is between ${today.min_temp} and ${today.max_temp}`);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 
+    getWeather(2487956);
+    getWeather(2534253); //error
 </script>
 <body>
 <h1>Asynchronous JavaScript</h1>
