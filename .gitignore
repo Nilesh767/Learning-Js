@@ -4,3 +4,8 @@
 .idea/vcs.xml
 .idea/modules.xml
 .idea/workspace.xml
+/7.Forkify-recipe-app/node_modules/
+7.Forkify-recipe-app/src/.DS_Store
+7.Forkify-recipe-app/dist/img/.DS_Store
+7.Forkify-recipe-app/dist/.DS_Store
+7.Forkify-recipe-app/package-lock.json
