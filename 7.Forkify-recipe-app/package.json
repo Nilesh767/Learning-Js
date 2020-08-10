@@ -1,15 +1,11 @@
 {
-  "name": "forkify-recipe-app",
+  "name": "forkify",
   "version": "1.0.0",
-  "description": "just a recipe app",
+  "description": "recipe app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "webpack": "^4.44.1"
-  },
-  "dependencies": {}
+  "license": "ISC"
 }
