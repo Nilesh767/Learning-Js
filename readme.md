@@ -1,1 +1,1 @@
-# Just Learning Js
+# Just Learning FrontEnd Development
