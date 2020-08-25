@@ -1,4 +1,6 @@
+.vscode
 .vscode/settings.json
+.idea
 .idea/jsLibraryMappings.xml
 .idea/Learning-Js.iml
 .idea/vcs.xml
