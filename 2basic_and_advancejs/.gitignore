@@ -1,0 +1,6 @@
+# ignored folders and files
+
+/2basic_and_advancejs\7forkify_recipe_app\node_modules/
+/package-lock.json
+
+.DS_Store
