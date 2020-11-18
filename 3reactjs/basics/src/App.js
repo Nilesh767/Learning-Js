@@ -5,23 +5,21 @@ import Person from "./Person/Person";
 class App extends Component {
   state = {
     persons: [
-      { name: "Nilesh", age: 21 },
-      { name: "Other name", age: 20 },
-      { name: "some name", age: 12 },
+      { id: '1', name: "Nilesh", age: 21 },
+      { id: 'a',name: "Other name", age: 20 },
+      { id: '2b', name: "some name", age: 12 },
     ],
     otherstate: "some other state",
     showPersons: false,
   };
 
-  switchNameHandler = (newName) => {
-    this.setState({
-      persons: [
-        { name: newName, age: 21 },
-        { name: "Other name", age: 20 },
-        { name: "some name", age: 18 },
-      ],
-    });
-  };
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+     //copy persons to a new obj, slice to copy(as js have array as reference type )
+    const persons = [...this.state.persons]; //ES6 method (spread operator)
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
+  }
 
   nameChangeHandler = (event) => {
     this.setState({
@@ -29,7 +27,7 @@ class App extends Component {
         { name: "Nilesh", age: 21 },
         { name: event.target.value, age: 20 },
         { name: "some name", age: 18 },
-      ],
+      ], 
     });
   };
 
@@ -52,7 +50,16 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person
+          {this.state.persons.map((person, index) => {
+            return <Person
+                     click={() => this.deletePersonHandler(index)}
+                     name={person.name} 
+                     age={person.age}
+                     key={person.id}
+                    />
+          })}
+
+          {/* <Person
             name={this.state.persons[0].name}
             age={this.state.persons[0].age}
           />
@@ -65,7 +72,8 @@ class App extends Component {
           <Person
             name={this.state.persons[2].name}
             age={this.state.persons[2].age}
-          />
+          /> */}
+
         </div>
       );
     }
