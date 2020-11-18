@@ -10,7 +10,8 @@ class App extends Component {
       { name: 'Other name', age: 20 },
       { name: 'some name', age: 12 }
     ],
-    otherstate: 'some other state'
+    otherstate: 'some other state',
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -33,6 +34,11 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons : !doesShow});
+  }
+
   render () {
     const style = {
       backgroundColor: 'white',
@@ -47,18 +53,24 @@ class App extends Component {
         <h1>Henlo... </h1>
         <p>Working!</p>
         <button style={style}
-          onClick={() => this.switchNameHandler('Nileeee')} > Switch Name </button>
-        <Person
-          name= {this.state.persons[0].name}
-          age= {this.state.persons[0].age} />
-        <Person
-          name= {this.state.persons[1].name}
-          age= {this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Neo')} 
-          changed={this.nameChangeHandler} >My hobby: some hobby </Person>
-        <Person
-          name= {this.state.persons[2].name}
-          age= {this.state.persons[2].age}  />
+          onClick={this.togglePersonsHandler} > Switch Name </button>
+        {
+          this.state.showPersons ? // IF-TRUE        --> ternary if operator
+            <div>
+              <Person
+                name= {this.state.persons[0].name}
+                age= {this.state.persons[0].age} />
+              <Person
+                name= {this.state.persons[1].name}
+                age= {this.state.persons[1].age}
+                click={this.switchNameHandler.bind(this, 'Neo')} 
+                changed={this.nameChangeHandler} >My hobby: some hobby </Person>
+              <Person
+                name= {this.state.persons[2].name}
+                age= {this.state.persons[2].age}  />
+            </div>
+          : null // IF-FALSE
+        }
       </div>  
     );
   }
