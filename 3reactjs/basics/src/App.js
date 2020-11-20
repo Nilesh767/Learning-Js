@@ -14,9 +14,7 @@ class App extends Component {
   };
 
   deletePersonHandler = (personIndex) => {
-    // const persons = this.state.persons.slice();
-     //copy persons to a new obj, slice to copy(as js have array as reference type )
-    const persons = [...this.state.persons]; //ES6 method (spread operator)
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons})
   }
@@ -45,7 +43,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: "white",
+      backgroundColor: "green",
+      color: "white",
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
@@ -68,6 +67,7 @@ class App extends Component {
           })}
         </div>
       );
+      style.backgroundColor = "red";
     }
 
     return (
