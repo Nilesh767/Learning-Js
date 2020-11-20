@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Radium from 'radium';// bcoz you cant use sudo selector(btn:hover) in jsx
+import Radium, {StyleRoot} from 'radium';// bcoz you cant use pseudo selector(btn:hover) in jsx
 import "./App.css";
 import Person from "./Person/Person";
 
@@ -88,12 +88,14 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <h1>Henlo... hooman!!!</h1>
-        <p className={classes.join(' ')}>Working! :)</p>
-        <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        {persons}
-      </div>  
+      <StyleRoot>
+        <div className="App">
+          <h1>Henlo... hooman!!!</h1>
+          <p className={classes.join(' ')}>Working! :)</p>
+          <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
+          {persons}
+        </div>  
+      </StyleRoot>  
     );
   }
 }
