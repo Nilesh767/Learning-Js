@@ -1,7 +1,21 @@
 import React, { Component } from "react";
-import Radium, {StyleRoot} from 'radium';// bcoz you cant use pseudo selector(btn:hover) in jsx
+import styled from 'styled-components';
 import "./App.css";
 import Person from "./Person/Person";
+
+const StyledButton = styled.button`
+      background-color: green;
+      color: white;
+      font: inherit;
+      border: 1px solid blue;
+      padding: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: lightgreen;
+        color: black;
+      }
+`;
 
 class App extends Component {
   state = {
@@ -88,15 +102,13 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
         <div className="App">
           <h1>Henlo... hooman!!!</h1>
           <p className={classes.join(' ')}>Working! :)</p>
-          <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
+          <StyledButton onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
           {persons}
-        </div>  
-      </StyleRoot>  
+        </div>
     );
   }
 }
-export default Radium(App);
+export default App;
