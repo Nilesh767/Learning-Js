@@ -27,7 +27,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('[5.App.js ComponentDidMount');
+    console.log('5.[App.js] ComponentDidMount');
+  }
+
+  shouldComponentUpdate() {
+    console.log('[App.js] should component update');
+    return true;
+  }
+  componentDidUpdate() {
+    console.log('[App.js]Component did update');
   }
 
   deletePersonHandler = (personIndex) => {
