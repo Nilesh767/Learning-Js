@@ -4,8 +4,18 @@ import classes from "./Cockpit.css";
 const cockpit = (props) => {
 
   useEffect(() => {
-    console.log('[Cockpit.js] useEffect');//runs after every render in react VDOM
-  })
+    console.log('[Cockpit.js] useEffect');
+    setTimeout(() => {
+      alert('fake http req');
+    })
+  }, [props.persons]);
+
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+    setTimeout(() => {
+      alert('fake http req');
+    })
+  }, []);// works as componentDidMount
 
     const assignedclasses = [];
     let btnClass = '';
