@@ -4,6 +4,13 @@ import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    console.log('Lifecycle hooks')
+    console.log('1.[App.js] constructor');
+  }
+
   state = {
     persons: [
       { id: "1", name: "Nilesh", age: 21 },
@@ -13,6 +20,15 @@ class App extends Component {
     otherstate: "some other state",
     showPersons: false,
   };
+
+  static getDerivedStateFromProps(props,state){
+    console.log('2.[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[5.App.js ComponentDidMount');
+  }
 
   deletePersonHandler = (personIndex) => {
     const persons = [...this.state.persons];
@@ -43,6 +59,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('3.[App.js] render');
     let persons = null; 
     if (this.state.showPersons) {
       persons = <Persons
@@ -54,6 +71,7 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Cockpit 
+        title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}/>
