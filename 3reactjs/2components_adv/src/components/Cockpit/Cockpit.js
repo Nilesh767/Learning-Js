@@ -5,11 +5,12 @@ const cockpit = (props) => {
 
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       alert('fake http req');
     }, 1000);
 
     return () => {
+      clearTimeout(timer);
       console.log('[Cockpit.js] Cleanup using useEffect')
     }
   }, []);// works as componentDidMount
