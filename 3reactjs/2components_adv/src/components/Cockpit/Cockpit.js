@@ -29,10 +29,10 @@ const cockpit = (props) => {
     if(props.showPersons) {
         btnClass = classes.Red;
     }
-    if (props.persons.length <= 2) {
+    if (props.personsLength <= 2) {
       assignedclasses.push(classes.red); // red
     }
-    if (props.persons.length <= 1) {
+    if (props.personsLength <= 1) {
       assignedclasses.push(classes.bold); // red + bold
     }
 
@@ -47,4 +47,4 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+export default React.memo(cockpit); // won't re-render cockpit while persons are re-rendered
