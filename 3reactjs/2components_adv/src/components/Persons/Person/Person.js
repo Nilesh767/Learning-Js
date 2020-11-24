@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 //import classes from "./Person.css";
-import Aux from "../../../hoc/Auxiliary";
+//import Aux from "../../../hoc/Auxiliary";
 
 class Person extends Component {
   render() {
     console.log("4.[Person.js] rendoring...");
     return (
-      <Aux>  
+      <Fragment>
         <p onClick={this.props.click}>
           I'm {this.props.name} and i am {this.props.age}yo!
         </p>
@@ -16,9 +16,8 @@ class Person extends Component {
           onChange={this.props.changed}
           value={this.props.name}
         />
-      </Aux>
-      //there can only be one root element(viz div) 
-      //but we can also use map(aka array with keys) and Aux which does nothing but just prints what is provided
+      </Fragment>
+      //inbuilt aux element from react v16.2
     );
   }
 }
