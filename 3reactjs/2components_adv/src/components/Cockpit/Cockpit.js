@@ -7,15 +7,20 @@ const cockpit = (props) => {
     console.log('[Cockpit.js] useEffect');
     setTimeout(() => {
       alert('fake http req');
-    })
-  }, [props.persons]);
+    }, 1000);
+
+    return () => {
+      console.log('[Cockpit.js] Cleanup using useEffect')
+    }
+  }, []);// works as componentDidMount
 
   useEffect(() => {
-    console.log('[Cockpit.js] useEffect');
-    setTimeout(() => {
-      alert('fake http req');
-    })
-  }, []);// works as componentDidMount
+    console.log('[Cockpit.js] II useEffect');
+    
+    return () => {
+      console.log('[Cockpit.js] Cleanup using II useEffect');
+    }
+  });
 
     const assignedclasses = [];
     let btnClass = '';
