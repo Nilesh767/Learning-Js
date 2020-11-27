@@ -1,16 +1,20 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import classes from "./Cockpit.css";
 
 const cockpit = (props) => {
 
+  const toggleBtnRef = useRef(null);
+
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
-    const timer = setTimeout(() => {
-      alert('fake http req');
-    }, 1000);
+    // const timer = setTimeout(() => {
+    //   alert('fake http req');
+    // }, 1000);
+
+    toggleBtnRef.current.click();
 
     return () => {
-      clearTimeout(timer);
+      //clearTimeout(timer);
       console.log('[Cockpit.js] Cleanup using useEffect')
     }
   }, []);// works as componentDidMount
@@ -40,9 +44,13 @@ const cockpit = (props) => {
     <div className={classes.Cockpit}>
       <h1>{props.title}</h1>
       <p className={assignedclasses.join(" ")}>Working! :)</p>
-      <button className={btnClass} onClick={props.clicked}>
+      <button 
+      ref={toggleBtnRef}
+      className={btnClass} 
+      onClick={props.clicked}>
         Toggle Persons
       </button>
+      <button onClick={props.login}>Log In</button>
     </div>
   );
 };

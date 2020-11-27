@@ -5,7 +5,6 @@ import Aux from "../../../hoc/Auxiliary";
 import withClass from "../../../hoc/withClass";
 
 class Person extends Component {
-
   constructor(props) {
     super(props);
     this.inputElementRef = React.createRef();
@@ -19,7 +18,8 @@ class Person extends Component {
   render() {
     console.log("4.[Person.js] rendoring...");
     return (
-      <Aux>  
+      <Aux>
+        {this.props.isAuth ? <p>Authenticated</p> : <p>Please Log In</p>}
         <p onClick={this.props.click}>
           I'm {this.props.name} and i am {this.props.age}yo!
         </p>
@@ -36,11 +36,11 @@ class Person extends Component {
   }
 }
 
-Person.PropTypes = {
+Person.propTypes = {
   click: PropTypes.func,
   name: PropTypes.string,
   age: PropTypes.number,
-  change: PropTypes.func
+  changed: PropTypes.func,
 };
 
 export default withClass(Person, classes.Person);
