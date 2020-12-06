@@ -21,9 +21,8 @@ class Modal extends Component {
         <div
           className={classes.Modal}
           style={{
-            transform: this.props.show ? "translateY(0)" : "trnaslateY(-100vh)",
-            opacity: this.props.show ? "1" : "0",
-            // This is causing the display BUG
+            transform: this.props.show ? "translateY(0)" : "translateY(-100vh)",
+            opacity: this.props.show ? "1" : "0"
           }}
         >
           {this.props.children}

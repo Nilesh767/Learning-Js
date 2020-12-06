@@ -1,4 +1,3 @@
-# Bug
+# Burger Builder App
 
-Order Summary bug
-It is not visible but is there even before buttons pressed.
+A burger builder app made using React
