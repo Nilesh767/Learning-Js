@@ -5,9 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
+//baseUrl for all urls
+axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
+
+//Setting Up Authorization, Content-type,etc.
+axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
+axios.defaults.headers.post['Context-Type'] = 'application/json';
+
+
 //Execute code globally
 axios.interceptors.request.use(request => {
-  console.log(request);
+    //console.log(request);
   return request;
 }, error => {
   console.log(error);
@@ -15,7 +23,7 @@ axios.interceptors.request.use(request => {
 });
 
 axios.interceptors.response.use(response => {
-  console.log(response);
+    //console.log(response);
   return response;
 }, error => {
   console.log(error);
