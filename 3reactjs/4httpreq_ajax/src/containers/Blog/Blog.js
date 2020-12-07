@@ -1,53 +1,11 @@
 import React, { Component } from "react";
-import axios from "../../axios";
+import {Route} from 'react-router-dom';
 
-import Post from "../../components/Post/Post";
 import "./Blog.css";
+import Posts from './Posts/Posts';
 
 class Blog extends Component {
-  state = {
-    posts: [],
-    selectedPostId: null,
-    error: false,
-  };
-
-  componentDidMount() {
-    axios
-      .get("/posts")
-      .then((response) => {
-        const posts = response.data.slice(0, 4);
-        const updatedPosts = posts.map((post) => {
-          return {
-            ...post,
-            author: "Nilesh",
-          };
-        });
-        this.setState({ posts: updatedPosts });
-      })
-      .catch((error) => {
-        this.setState({ error: true });
-        console.log(error);
-      });
-  }
-
-  postSelectedHandler = (id) => {
-    this.setState({ selectedPostId: id });
-  };
-
   render() {
-    let posts = <p style={{ textAlign: "center" }}>Something Went Wrong!!</p>;
-    if (!this.state.error) {
-      posts = this.state.posts.map((post) => {
-        return (
-          <Post
-            key={post.id}
-            title={post.title}
-            author={post.author}
-            clicked={() => this.postSelectedHandler(post.id)}
-          />
-        );
-      });
-    }
     return (
       <div className="Blog">
         <header>
@@ -57,15 +15,16 @@ class Blog extends Component {
                 <a href="/">Home</a>
               </li>
               <li>
-                <a href="/">New Post</a>
+                <a href="/new-post">New Post</a>
               </li>
             </ul>
           </nav>
         </header>
-        <section className="Posts">{posts}</section>
+      <Route path="/" exact render={() => <h1>Home</h1>} />
+      <Route path="/" render={() => <h1>New Post</h1>} />
+      <Posts />
       </div>
     );
   }
 }
-
 export default Blog;
