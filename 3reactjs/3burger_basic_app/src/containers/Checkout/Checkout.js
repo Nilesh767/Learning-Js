@@ -12,7 +12,7 @@ class Checkout extends Component {
       cheese: 0,
       bacon: 0,
     },
-    totalPrice: 0,
+    price: 0,
   };
 
   componentDidMount() {
@@ -26,7 +26,7 @@ class Checkout extends Component {
         ingredients[param[0]] = +param[1];
       }
     }
-    this.setState({ ingredients: ingredients, totalPrice: price });
+    this.setState({ ingredients: ingredients, price: price });
   }
 
   checkoutCancelledHandler = () => {
@@ -50,7 +50,7 @@ class Checkout extends Component {
           render={(props) => (
             <ContactData
               ingredients={this.state.ingredients}
-              price={this.state.totalPrice}
+              price={this.state.price}
               {...props}
             />
           )}
