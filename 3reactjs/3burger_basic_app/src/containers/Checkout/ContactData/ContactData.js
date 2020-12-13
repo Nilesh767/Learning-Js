@@ -5,14 +5,54 @@ import classes from "./ContactData.css";
 
 import Button from "../../../components/UI/Button/Button";
 import Spinner from "../../../components/UI/Spinner/Spinner";
+import Input from "../../../components/UI/Input/Input";
 
 class ContactData extends Component {
   state = {
-    name: "Nilesh",
-    email: "test@test.com",
-    address: {
-      street: "street",
-      postalCode: "xyz1123",
+    orderForm: {
+      name: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your Name",
+        },
+        value: "Nilesh",
+      },
+      email: {
+        elementType: "input",
+        elementConfig: {
+          type: "email",
+          placeholder: "Your E-Mail",
+        },
+        value: "Nilesh",
+      },
+      street: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Street",
+        },
+        value: "Nilesh",
+      },
+      zipcode: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Zipcode",
+        },
+        value: "Nilesh",
+      },
+      country: {
+        elementType: "slect",
+        elementConfig: {
+          options: [
+            { value: "fastest", displayValue: "Fastest" },
+            { value: "cheapest", displayValue: "Cheapest" },
+          ],
+        },
+        value: "Nilesh",
+      },
+      deliveryMethod: "fastest",
     },
     loading: false,
   };
@@ -35,7 +75,7 @@ class ContactData extends Component {
       .post("/orders.json", order)
       .then((response) => {
         this.setState({ loading: false });
-        this.props.history.push('/');
+        this.props.history.push("/");
       })
       .catch((error) => {
         this.setState({ loading: false });
@@ -45,26 +85,21 @@ class ContactData extends Component {
   render() {
     let form = (
       <form>
-        <input
-          className={classes.Input}
-          type="text"
-          name="Name"
-          placeholder="Your Name"
-        />
-        <input
-          className={classes.Input}
+        <Input elementType="..." elementConfig="..." value="..." />
+        <Input
+          inputtype="input"
           type="email"
           name="email"
           placeholder="Your Mail"
         />
-        <input
-          className={classes.Input}
+        <Input
+          inputtype="input"
           type="text"
           name="street"
           placeholder="Street"
         />
-        <input
-          className={classes.Input}
+        <Input
+          inputtype="input"
           type="text"
           name="postal"
           placeholder="Postal Code"
@@ -75,11 +110,9 @@ class ContactData extends Component {
       </form>
     );
 
-
     if (this.state.loading) {
       form = <Spinner />;
     }
-
 
     return (
       <div className={classes.ContactData}>
