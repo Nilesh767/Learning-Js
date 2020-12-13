@@ -16,7 +16,7 @@ class ContactData extends Component {
           type: "text",
           placeholder: "Your Name",
         },
-        value: "Nilesh",
+        value: "",
       },
       email: {
         elementType: "input",
@@ -24,7 +24,7 @@ class ContactData extends Component {
           type: "email",
           placeholder: "Your E-Mail",
         },
-        value: "Nilesh",
+        value: "",
       },
       street: {
         elementType: "input",
@@ -32,7 +32,7 @@ class ContactData extends Component {
           type: "text",
           placeholder: "Street",
         },
-        value: "Nilesh",
+        value: "",
       },
       zipcode: {
         elementType: "input",
@@ -40,19 +40,26 @@ class ContactData extends Component {
           type: "text",
           placeholder: "Zipcode",
         },
-        value: "Nilesh",
+        value: "",
       },
       country: {
-        elementType: "slect",
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Country",
+        },
+        value: "",
+      },
+      deliveryMethod: {
+        elementType: "select",
         elementConfig: {
           options: [
             { value: "fastest", displayValue: "Fastest" },
             { value: "cheapest", displayValue: "Cheapest" },
           ],
         },
-        value: "Nilesh",
+        value: "",
       },
-      deliveryMethod: "fastest",
     },
     loading: false,
   };
@@ -83,27 +90,23 @@ class ContactData extends Component {
   };
 
   render() {
+    const formElementArray = [];
+    for (let key in this.state.orderForm) {
+      formElementArray.push({
+        id: key,
+        config: this.state.orderForm[key],
+      });
+    }
     let form = (
       <form>
-        <Input elementType="..." elementConfig="..." value="..." />
-        <Input
-          inputtype="input"
-          type="email"
-          name="email"
-          placeholder="Your Mail"
-        />
-        <Input
-          inputtype="input"
-          type="text"
-          name="street"
-          placeholder="Street"
-        />
-        <Input
-          inputtype="input"
-          type="text"
-          name="postal"
-          placeholder="Postal Code"
-        />
+        {formElementArray.map((formElement) => (
+          <Input
+            key={formElement.id}
+            elementType={formElement.config.elementType}
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+          />
+        ))}
         <Button btnType="Success" clicked={this.orderHandler}>
           ORDER
         </Button>
