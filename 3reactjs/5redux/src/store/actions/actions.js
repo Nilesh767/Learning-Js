@@ -20,21 +20,29 @@ export const decrement = () => {
 export const add = (value) => {
   return {
     type: ADD,
-    value: value
+    value: value,
   };
 };
 
 export const subtract = (value) => {
   return {
     type: SUBTRACT,
-    value: value  
+    value: value,
+  };
+};
+
+export const saveResult = (result) => {
+  return {
+    type: STORE_RESULT,
+    result: result,
   };
 };
 
 export const storeResult = (result) => {
-  return {
-    type: STORE_RESULT,
-    result: result,
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(saveResult(result));
+    }, 2000);
   };
 };
 
