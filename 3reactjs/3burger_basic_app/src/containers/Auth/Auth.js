@@ -8,6 +8,8 @@ import * as actions from "../../store/actions/index";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 
+import Spinner from "../../components/UI/Spinner/Spinner";
+
 class Auth extends Component {
   state = {
     controls: {
@@ -105,9 +107,9 @@ class Auth extends Component {
       });
     }
 
-    const form = formElementArray.map((formElement) => (
+    let form = formElementArray.map((formElement) => (
       <Input
-        key={formElementArray.id}
+        key={formElement.id}
         elementType={formElement.config.elementType}
         elementConfig={formElement.config.elementConfig}
         value={formElement.config.value}
@@ -117,6 +119,15 @@ class Auth extends Component {
         changed={(event) => this.inputChangedHandler(event, formElement.id)}
       />
     ));
+
+    if (this.props.loading) {
+      form = <Spinner />;
+    }
+
+    let errorMessage = null;
+    if (this.props.error) {
+      errorMessage = <p>{this.props.error.message}</p>;
+    }
 
     return (
       <div className={classes.Auth}>
@@ -128,10 +139,18 @@ class Auth extends Component {
           Switch To
           {this.state.isSignUp ? " Sign In" : " Sign Up"}
         </Button>
+        {errorMessage}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -140,4 +159,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
