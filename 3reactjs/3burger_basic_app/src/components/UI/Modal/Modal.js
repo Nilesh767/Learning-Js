@@ -5,7 +5,6 @@ import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import Backdrop from "../Backdrop/Backdrop";
 
 class Modal extends Component {
-
   shouldComponentUpdate(nextProps, nextState) {
     return nextProps.shpw !== this.props.show;
   }
@@ -18,7 +17,7 @@ class Modal extends Component {
           className={classes.Modal}
           style={{
             transform: this.props.show ? "translateY(0)" : "translateY(-100vh)",
-            opacity: this.props.show ? "1" : "0"
+            opacity: this.props.show ? "1" : "0",
           }}
         >
           {this.props.children}
