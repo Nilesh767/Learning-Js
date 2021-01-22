@@ -3,10 +3,20 @@ import Link from "next/link";
 import Router from "next/router";
 
 class IndexPage extends Component {
+  static getInitialProps(context) {
+    console.log(context);
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ appName: "Some App" });
+      }, 1000);
+    });
+    return promise;
+  }
+
   render() {
     return (
       <div>
-        <h1>Main Page</h1>
+        <h1>Main Page of {this.props.appName}</h1>
         <p>
           Go to
           <Link href="/auth">
