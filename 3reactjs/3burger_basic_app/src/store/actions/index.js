@@ -4,16 +4,16 @@ export {
   initIngredients,
 } from "./burgerBuilder";
 
-export { 
-    purchaseBurger,
-    purchaseInit,
-    fetchedOrders
-  } from "./order";
+export { purchaseBurger, purchaseInit, fetchedOrders } from "./order";
 
 export {
   auth,
   logout,
   setAuthRedirectPath,
   authCheckState,
-  logoutSucceed
-} from './auth';
+  logoutSucceed,
+  authStart,
+  authSuccess,
+  authFail,
+  checkAuthTimeout,
+} from "./auth";
