@@ -6,27 +6,6 @@ import Search from "./Search";
 
 function Ingredients() {
   const [userIngredients, setUserIngredients] = useState([]);
-
-  useEffect(() => {
-    fetch(
-      "https://react-hooks-1cd0b-default-rtdb.firebaseio.com/ingredients.json"
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((responseData) => {
-        const loadedIngredients = [];
-        for (const key in responseData) {
-          loadedIngredients.push({
-            id: key,
-            title: responseData[key].title,
-            amount: responseData[key].amount,
-          });
-        }
-        setUserIngredients(loadedIngredients);
-      });
-  }, []);
-
   useEffect(() => {
     console.log("Rendering...", userIngredients);
   }, [userIngredients]);
