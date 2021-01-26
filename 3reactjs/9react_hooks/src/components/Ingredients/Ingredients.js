@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
 
+import ErrorModal from "../UI/ErrorModal";
+
 import IngredientForm from "./IngredientForm";
 import IngredientList from "./IngredientList";
 import Search from "./Search";
 
 function Ingredients() {
   const [userIngredients, setUserIngredients] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
 
   useEffect(() => {
     console.log("Rendering...", userIngredients);
@@ -16,6 +20,7 @@ function Ingredients() {
   }, []);
 
   const addIngredientHandler = (ingredient) => {
+    setIsLoading(true);
     fetch(
       "https://react-hooks-1cd0b-default-rtdb.firebaseio.com/ingredients.json",
       {
@@ -25,6 +30,7 @@ function Ingredients() {
       }
     )
       .then((response) => {
+        setIsLoading(false);
         return response.json();
       })
       .then((responseData) => {
@@ -32,25 +38,44 @@ function Ingredients() {
           ...prevIngredients,
           { id: responseData.name, ...ingredient },
         ]);
-      });
+      })
+      .catch((error) => {
+        setError(error.message);
+        setIsLoading(false);
+      });;
   };
 
   const removeIngredientHandler = (ingredientId) => {
+    setIsLoading(true);
     fetch(
       `https://react-hooks-1cd0b-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
       {
         method: "DELETE",
       }
-    ).then((response) => {
-      setUserIngredients((prevIngredients) =>
-        prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
-      );
-    });
+    )
+      .then((response) => {
+        setIsLoading(false);
+        setUserIngredients((prevIngredients) =>
+          prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
+        );
+      })
+      .catch((error) => {
+        setError(error.message);
+        setIsLoading(false);
+      });
+  };
+
+  const clearError = () => {
+    setError(null);
   };
 
   return (
     <div className="App">
-      <IngredientForm onAddIngredient={addIngredientHandler} />
+      {error && <ErrorModal onClose={clearError}>{error}</ErrorModal>}
+      <IngredientForm
+        onAddIngredient={addIngredientHandler}
+        loading={isLoading}
+      />
       <section>
         <Search onLoadIngredients={filteredIngredientsHandler} />
         <IngredientList
