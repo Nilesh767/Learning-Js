@@ -40,21 +40,16 @@ const Ingredients = () => {
     loading: false,
     error: null,
   });
-  //const [userIngredients, setUserIngredients] = useState([]);
-  //const [isLoading, setIsLoading] = useState(false);
-  //const [error, setError] = useState();
 
   useEffect(() => {
     console.log("Rendering...", userIngredients);
   }, [userIngredients]);
 
   const filteredIngredientsHandler = useCallback((filteredIngredients) => {
-    //setUserIngredients(filteredIngredients);
     dispatch({ type: "SET", ingredients: filteredIngredients });
   }, []);
 
   const addIngredientHandler = (ingredient) => {
-    // setIsLoading(true);
     dispatchHttp({ type: "SEND" });
     fetch(
       "https://react-hooks-1cd0b-default-rtdb.firebaseio.com/ingredients.json",
@@ -65,30 +60,21 @@ const Ingredients = () => {
       }
     )
       .then((response) => {
-        // setIsLoading(false);
         dispatchHttp({ type: "RESPONSE" });
         return response.json();
       })
       .then((responseData) => {
-        // setUserIngredients((prevIngredients) => [
-        //   ...prevIngredients,
-        //   { id: responseData.name, ...ingredient },
-        // ]);
-
         dispatch({
           type: "ADD",
           ingredient: { id: responseData.name, ...ingredient },
         });
       })
       .catch((error) => {
-        // setError(error.message);
-        // setIsLoading(false);
         dispatchHttp({ type: "ERROR", errorMessage: error.message });
       });
   };
 
   const removeIngredientHandler = (ingredientId) => {
-    // setIsLoading(true);
     dispatchHttp({ type: "SEND" });
     fetch(
       `https://react-hooks-1cd0b-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
@@ -98,22 +84,14 @@ const Ingredients = () => {
     )
       .then((response) => {
         dispatchHttp({ type: "RESPONSE" });
-        // setIsLoading(false);
-        // setUserIngredients((prevIngredients) =>
-        //   prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
-        // );
-
         dispatch({ type: "DELETE", id: ingredientId });
       })
       .catch((error) => {
-        // setError(error.message);
-        // setIsLoading(false);
         dispatchHttp({ type: "ERROR", errorMessage: error.message });
       });
   };
 
   const clearError = () => {
-    // setError(null);
     dispatchHttp({ type: "CLEAR" });
   };
 
