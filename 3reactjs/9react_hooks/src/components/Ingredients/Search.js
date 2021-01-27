@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
+import useHttp from "../../hooks/http";
+
+import useHooks from "../../hooks/http";
 
 import Card from "../UI/Card";
+import ErrorModal from "../UI/ErrorModal";
 import "./Search.css";
 
 const Search = React.memo((props) => {
   const { onLoadIngredients } = props;
   const [enteredFilter, setEnteredFilter] = useState("");
   const inputRef = useRef();
-
+  const { isLoading, error, data, sendRequest, clear } = useHttp();
   useEffect(() => {
     const timer = setTimeout(() => {
       if (enteredFilter === inputRef.current.value) {
@@ -15,36 +19,38 @@ const Search = React.memo((props) => {
           enteredFilter.length === 0
             ? ""
             : `?orderBy="title"&equalTo="${enteredFilter}"`;
-        fetch(
+
+        sendRequest(
           "https://react-hooks-1cd0b-default-rtdb.firebaseio.com/ingredients.json" +
-            query
-        )
-          .then((response) => {
-            return response.json();
-          })
-          .then((responseData) => {
-            const loadedIngredients = [];
-            for (const key in responseData) {
-              loadedIngredients.push({
-                id: key,
-                title: responseData[key].title,
-                amount: responseData[key].amount,
-              });
-            }
-            onLoadIngredients(loadedIngredients);
-          });
+            query,
+          "GET"
+        );
       }
     }, 500);
     return () => {
       clearTimeout(timer);
     };
-  }, [enteredFilter, onLoadIngredients, inputRef]);
+  }, [enteredFilter, onLoadIngredients, inputRef, sendRequest]);
+
+  useEffect(() => {
+    const loadedIngredients = [];
+    for (const key in data) {
+      loadedIngredients.push({
+        id: key,
+        title: data[key].title,
+        amount: data[key].amount,
+      });
+    }
+    onLoadIngredients(loadedIngredients);
+  }, [data, isLoading, error, onLoadIngredients]);
 
   return (
     <section className="search">
+      {error && <ErrorModal onClose={clear}>{error}</ErrorModal>}
       <Card>
         <div className="search-input">
           <label>Filter by Title</label>
+          {isLoading && <span>Loading...</span>}
           <input
             ref={inputRef}
             type="text"
