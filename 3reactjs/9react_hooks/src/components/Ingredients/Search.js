@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import useHttp from "../../hooks/http";
 
-import useHooks from "../../hooks/http";
-
 import Card from "../UI/Card";
 import ErrorModal from "../UI/ErrorModal";
 import "./Search.css";
